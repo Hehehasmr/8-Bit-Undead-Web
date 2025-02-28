@@ -24,13 +24,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         create() {
+            this.cameras.main.setBackgroundColor('#222'); // Dark background
             this.add.text(250, 200, "8-Bit Undead", { fontSize: "32px", fill: "#fff" });
-            this.add.text(250, 300, "Press 1 for Easy Mode", { fontSize: "20px", fill: "#fff" });
-            this.add.text(250, 350, "Press 2 for Hard Mode", { fontSize: "20px", fill: "#fff" });
-            this.add.text(250, 400, "Press S for Shop", { fontSize: "20px", fill: "#fff" });
+            this.add.text(250, 300, "Click to Play", { fontSize: "20px", fill: "#fff" });
+            this.add.text(250, 350, "Press S for Shop", { fontSize: "20px", fill: "#fff" });
 
-            this.input.keyboard.on("keydown-ONE", () => this.scene.start("PlayScene", { difficulty: "easy" }));
-            this.input.keyboard.on("keydown-TWO", () => this.scene.start("PlayScene", { difficulty: "hard" }));
+            this.input.on("pointerdown", () => this.scene.start("PlayScene", { difficulty: "easy" }));
             this.input.keyboard.on("keydown-S", () => this.scene.start("ShopScene"));
         }
     }
@@ -105,9 +104,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         create() {
             this.add.text(300, 250, "Game Over!", { fontSize: "32px", fill: "#ff0000" });
-            this.add.text(300, 300, "Press M to Return to Menu", { fontSize: "20px", fill: "#fff" });
+            this.add.text(300, 300, "Click to Restart", { fontSize: "20px", fill: "#fff" });
 
-            this.input.keyboard.on("keydown-M", () => this.scene.start("StartMenu"));
+            this.input.on("pointerdown", () => {
+                this.scene.start("StartMenu");
+            });
         }
     }
 });
