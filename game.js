@@ -11,11 +11,17 @@ let game = new Phaser.Game(config);
 class StartMenu extends Phaser.Scene {
     constructor() { super("StartMenu"); }
 
+    preload() {
+        this.load.image('player', 'character.png'); // Updated player image
+        this.load.image('bullet', 'bullet.png');
+        this.load.image('zombie', 'zombie.png');
+    }
+
     create() {
-        this.add.text(300, 200, "8-Bit Undead", { fontSize: "32px", fill: "#fff" });
-        this.add.text(300, 300, "Press 1 for Easy Mode", { fontSize: "20px", fill: "#fff" });
-        this.add.text(300, 350, "Press 2 for Hard Mode", { fontSize: "20px", fill: "#fff" });
-        this.add.text(300, 400, "Press S for Shop", { fontSize: "20px", fill: "#fff" });
+        this.add.text(250, 200, "8-Bit Undead", { fontSize: "32px", fill: "#fff" });
+        this.add.text(250, 300, "Press 1 for Easy Mode", { fontSize: "20px", fill: "#fff" });
+        this.add.text(250, 350, "Press 2 for Hard Mode", { fontSize: "20px", fill: "#fff" });
+        this.add.text(250, 400, "Press S for Shop", { fontSize: "20px", fill: "#fff" });
 
         this.input.keyboard.on("keydown-ONE", () => this.scene.start("PlayScene", { difficulty: "easy" }));
         this.input.keyboard.on("keydown-TWO", () => this.scene.start("PlayScene", { difficulty: "hard" }));
