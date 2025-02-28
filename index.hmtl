@@ -11,6 +11,7 @@
     </style>
 </head>
 <body>
-    <script src="game.js"></script>
+    <h1 style="color: white;">Loading Game...</h1>
+    <script defer src="game.js"></script>
 </body>
 </html>
