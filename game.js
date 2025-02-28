@@ -1,4 +1,4 @@
-console.log("Game.js is running!"); // Debugging
+console.log("Game.js is running!"); // Debugging message
 
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOM fully loaded and parsed");
@@ -23,11 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function create() {
         console.log("Creating game scene...");
-        this.cameras.main.setBackgroundColor('#222'); // Set a dark gray background for visibility
+
+        this.cameras.main.setBackgroundColor('#444'); // Gray background for visibility
         
-        this.add.text(300, 250, "Game Loaded!", { fontSize: "32px", fill: "#fff" });
+        let debugText = this.add.text(250, 250, "Game Loaded!", { fontSize: "32px", fill: "#fff" });
+        console.log("Game Loaded text added.");
 
         let player = this.physics.add.sprite(400, 300, 'player').setCollideWorldBounds(true);
+        player.setTint(0x00ff00); // Make player bright green for debugging
         console.log("Player sprite added!");
 
         let cursors = this.input.keyboard.createCursorKeys();
