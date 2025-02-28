@@ -1,3 +1,4 @@
+console.log("Game.js is running!");
 let config = {
     type: Phaser.AUTO,
     width: 800,
