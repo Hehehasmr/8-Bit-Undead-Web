@@ -3,17 +3,6 @@ console.log("Game.js is running!"); // Debugging message
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOM fully loaded and parsed");
 
-    let config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-        physics: { default: 'arcade', arcade: { gravity: { y: 0 } } },
-        scene: [StartMenu, PlayScene, ShopScene, GameOverScene]
-    };
-
-    let game = new Phaser.Game(config);
-    console.log("Phaser Game Initialized!"); // Debugging
-
     class StartMenu extends Phaser.Scene {
         constructor() { super("StartMenu"); }
 
@@ -29,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
             this.add.text(250, 300, "Click to Play", { fontSize: "20px", fill: "#fff" });
             this.add.text(250, 350, "Press S for Shop", { fontSize: "20px", fill: "#fff" });
 
-            this.input.on("pointerdown", () => this.scene.start("PlayScene", { difficulty: "easy" }));
+            this.input.on("pointerdown", () => this.scene.start("PlayScene"));
             this.input.keyboard.on("keydown-S", () => this.scene.start("ShopScene"));
         }
     }
@@ -37,16 +26,15 @@ document.addEventListener("DOMContentLoaded", function () {
     class PlayScene extends Phaser.Scene {
         constructor() { super("PlayScene"); }
 
-        create(data) {
-            this.difficulty = data.difficulty;
+        create() {
             this.player = this.physics.add.sprite(400, 300, 'player').setCollideWorldBounds(true);
             this.cursors = this.input.keyboard.createCursorKeys();
             this.bullets = this.physics.add.group({ defaultKey: 'bullet' });
             this.zombies = this.physics.add.group();
-            this.health = (this.difficulty === "easy") ? 100 : 50;
+            this.health = 100;
             this.healthText = this.add.text(10, 10, `Health: ${this.health}`, { fontSize: "20px", fill: "#fff" });
 
-            for (let i = 0; i < (this.difficulty === "easy" ? 3 : 6); i++) {
+            for (let i = 0; i < 5; i++) {
                 this.spawnZombie();
             }
 
@@ -111,4 +99,15 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     }
+
+    let config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        physics: { default: 'arcade', arcade: { gravity: { y: 0 } } },
+        scene: [StartMenu, PlayScene, ShopScene, GameOverScene]
+    };
+
+    let game = new Phaser.Game(config);
+    console.log("Phaser Game Initialized!"); // Debugging
 });
